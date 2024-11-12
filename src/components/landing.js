@@ -1,22 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './landing.css'; 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Footer from './footer';
+import BorrowerHeader from './borrowerheader';
 
 const Landing = () => {
 
+    const [loggedIn, setLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Check if the user is logged in by looking for the token in localStorage
+        const token = localStorage.getItem('token');
+        if (token) {
+            setLoggedIn(true);
+        } else {
+            setLoggedIn(false);
+        }
+    }, []);
+
+    // Function to handle when the user clicks on the profile image
+    const handleProfileClick = () => {
+        // Ensure the token is still available and then navigate to the officer profile page
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate('/borrowerdash'); // Redirect to officer profile
+        } else {
+            // Optional: Handle the case when no token is found (e.g., navigate to login)
+            navigate('/login');
+        }
+    };
+
     const settings = {
-        dots: true, // Show dots for slide navigation
-        infinite: true, // Infinite loop sliding
-        speed: 500, // Slide transition speed
-        slidesToShow: 1, // Number of slides to show at a time
-        slidesToScroll: 1, // Number of slides to scroll at a time
-        autoplay: true, // Enable auto slide
-        autoplaySpeed: 2000, // Time in milliseconds between auto slides
-        arrows: true, // Show navigation arrows
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: true,
     };
 
     const slides = [
@@ -35,23 +61,35 @@ const Landing = () => {
 
     return (
         <div className="landing-page">
-             <header>
-                <img src="logo.png" alt="MSU-IIT NMPC Logo" className="logo"/>
-                <h2 className="landingh2">MSU-IIT National Multi-Purpose Cooperative</h2>
-                
-                <a href="/login" className="nave">Login</a>
-                <a href="/register" className="nave1" >Register</a> 
+             <header>        
+             {loggedIn ? (
+                    <>
+                     <BorrowerHeader /> 
+                        
+                    </>
+                ) : (
+                    <>
+                    <img src="logo.png" alt="MSU-IIT NMPC Logo" className="logol"/>
+                    <h2 className="landingh2q">MSU-IIT National Multi-Purpose Cooperative</h2>
+                        <div className="logger">
+                            <a href="/login" className="nave">Login</a>
+                            <a href="/register" className="nave1">Register</a>
+                        </div>
+                        
+                    </>
+                )}
             </header>
+            
             <div className="contentlan">
                <div className="main-banner">
-                <div className="text-content">
-                    <h1>Quick and Easy Loans for Your Financial Needs.</h1>
-                    <p>Our loan services offer a hassle-free and streamlined borrowing experience, providing you with the funds you need in a timely manner to meet your financial requirements.</p>
-                    <button className="apply-btn">Apply Now!</button>
-                    
+                    <div className="text-content">
+                        <h1>Quick and Easy Loans for Your Financial Needs.</h1>
+                        <p>Our loan services offer a hassle-free and streamlined borrowing experience, providing you with the funds you need in a timely manner to meet your financial requirements.</p>
+                        <Link to="/appform" style={{ textDecoration: 'none', color: 'inherit' }}>Apply Now!</Link>
+                        
+                    </div>
+                    <img src="bldg.png" alt="Building" className="banner-img"/>
                 </div>
-                <img src="bldg.png" alt="Building" className="banner-img"/>
-            </div>
                 <div className="services-section">
                         <h2 className="services">About Us</h2>
                             <p className="aboutp">The MSU-IIT National Multi-Purpose Cooperative is a financial institution based in Iligan City, Lanao del Norte, Philippines.
