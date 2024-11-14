@@ -1,0 +1,600 @@
+[{
+  "_id": {
+    "$oid": "6716754351d085810e94d83f"
+  },
+  "loanId": "LN12345",
+  "applicantName": "John Doe",
+  "loanType": "Educational",
+  "loanAmount": 50000,
+  "interestRate": 5.2,
+  "loanTerm": 5,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2024-10-21T00:00:00.000Z"
+  },
+  "currentBalance": 50000,
+  "paymentDueDate": {
+    "$date": "2024-11-01T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Pending",
+  "riskRating": "Low",
+  "applicationDate": {
+    "$date": "2024-09-01T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2024-09-15T00:00:00.000Z"
+  },
+  "notes": "Customer has a strong credit history.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671679d951d085810e94d841"
+  },
+  "loanId": "LN12346",
+  "applicantName": "Alice Smith",
+  "loanType": "Educational",
+  "loanAmount": 20000,
+  "interestRate": 4.5,
+  "loanTerm": 10,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2023-09-15T00:00:00.000Z"
+  },
+  "currentBalance": 19000,
+  "paymentDueDate": {
+    "$date": "2024-11-01T00:00:00.000Z"
+  },
+  "paymentStatus": "Overdue",
+  "defaultStatus": "Approved",
+  "riskRating": "Medium",
+  "applicationDate": {
+    "$date": "2023-08-10T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2023-09-01T00:00:00.000Z"
+  },
+  "notes": "First-time borrower.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167a9751d085810e94d848"
+  },
+  "loanId": "LN12348",
+  "applicantName": "Cathy Williams",
+  "loanType": "Pensioner",
+  "loanAmount": 150000,
+  "interestRate": 3.8,
+  "loanTerm": 20,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2020-01-20T00:00:00.000Z"
+  },
+  "currentBalance": 135000,
+  "paymentDueDate": {
+    "$date": "2024-10-25T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Approved",
+  "riskRating": "Medium",
+  "applicationDate": {
+    "$date": "2019-12-01T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2019-12-20T00:00:00.000Z"
+  },
+  "notes": "Excellent credit history.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167b0451d085810e94d84a"
+  },
+  "loanId": "LN12347",
+  "applicantName": "Bob Johnson",
+  "loanType": "Educational",
+  "loanAmount": 30000,
+  "interestRate": 6,
+  "loanTerm": 7,
+  "repaymentSchedule": "Bi-weekly",
+  "disbursementDate": {
+    "$date": "2022-05-10T00:00:00.000Z"
+  },
+  "currentBalance": 25000,
+  "paymentDueDate": {
+    "$date": "2024-10-22T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Pending",
+  "riskRating": "Low",
+  "applicationDate": {
+    "$date": "2022-04-15T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2022-04-30T00:00:00.000Z"
+  },
+  "notes": "Reliable payer.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167b5351d085810e94d84e"
+  },
+  "loanId": "LN12349",
+  "applicantName": "Daniel Lee",
+  "loanType": "Personal",
+  "loanAmount": 50000,
+  "interestRate": 7.2,
+  "loanTerm": 8,
+  "repaymentSchedule": "Quarterly",
+  "disbursementDate": {
+    "$date": "2021-04-15T00:00:00.000Z"
+  },
+  "currentBalance": 40000,
+  "paymentDueDate": {
+    "$date": "2024-12-01T00:00:00.000Z"
+  },
+  "paymentStatus": "Overdue",
+  "defaultStatus": "Review",
+  "riskRating": "High",
+  "applicationDate": {
+    "$date": "2021-03-10T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2021-03-30T00:00:00.000Z"
+  },
+  "notes": "Business struggling due to market conditions.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167b7051d085810e94d850"
+  },
+  "loanId": "LN12350",
+  "applicantName": "Emily Clark",
+  "loanType": "Personal",
+  "loanAmount": 12000,
+  "interestRate": 5.5,
+  "loanTerm": 3,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2022-12-01T00:00:00.000Z"
+  },
+  "currentBalance": 9000,
+  "paymentDueDate": {
+    "$date": "2024-10-31T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Pending",
+  "riskRating": "Low",
+  "applicationDate": {
+    "$date": "2022-11-01T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2022-11-15T00:00:00.000Z"
+  },
+  "notes": "Occasional late payments.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167b7c51d085810e94d852"
+  },
+  "loanId": "LN12351",
+  "applicantName": "Frank Davis",
+  "loanType": "Educational",
+  "loanAmount": 18000,
+  "interestRate": 3.7,
+  "loanTerm": 15,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2023-02-20T00:00:00.000Z"
+  },
+  "currentBalance": 17500,
+  "paymentDueDate": {
+    "$date": "2024-11-10T00:00:00.000Z"
+  },
+  "paymentStatus": "Overdue",
+  "defaultStatus": "Approved",
+  "riskRating": "Medium",
+  "applicationDate": {
+    "$date": "2023-01-10T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2023-01-25T00:00:00.000Z"
+  },
+  "notes": "First loan for student support.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167b8851d085810e94d854"
+  },
+  "loanId": "LN12352",
+  "applicantName": "Grace Harris",
+  "loanType": "Personal",
+  "loanAmount": 25000,
+  "interestRate": 4.9,
+  "loanTerm": 5,
+  "repaymentSchedule": "Bi-weekly",
+  "disbursementDate": {
+    "$date": "2022-07-12T00:00:00.000Z"
+  },
+  "currentBalance": 18000,
+  "paymentDueDate": {
+    "$date": "2024-11-05T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Approved",
+  "riskRating": "Low",
+  "applicationDate": {
+    "$date": "2022-06-15T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2022-07-01T00:00:00.000Z"
+  },
+  "notes": "Customer refinanced once.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167b8f51d085810e94d856"
+  },
+  "loanId": "LN12353",
+  "applicantName": "Harry Brown",
+  "loanType": "Personal",
+  "loanAmount": 30000,
+  "interestRate": 6.5,
+  "loanTerm": 4,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2023-08-10T00:00:00.000Z"
+  },
+  "currentBalance": 29000,
+  "paymentDueDate": {
+    "$date": "2024-11-01T00:00:00.000Z"
+  },
+  "paymentStatus": "Overdue",
+  "defaultStatus": "Review",
+  "riskRating": "High",
+  "applicationDate": {
+    "$date": "2023-07-15T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2023-07-30T00:00:00.000Z"
+  },
+  "notes": "Loan used for vacation.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167f0551d085810e94d858"
+  },
+  "loanId": "LN12354",
+  "applicantName": "Isabella Miller",
+  "loanType": "Educational",
+  "loanAmount": 250000,
+  "interestRate": 3.2,
+  "loanTerm": 30,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2021-03-10T00:00:00.000Z"
+  },
+  "currentBalance": 230000,
+  "paymentDueDate": {
+    "$date": "2024-11-15T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Review",
+  "riskRating": "Medium",
+  "applicationDate": {
+    "$date": "2021-02-01T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2021-02-20T00:00:00.000Z"
+  },
+  "notes": "Stable income with timely payments.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167f0c51d085810e94d85a"
+  },
+  "loanId": "LN12355",
+  "applicantName": "Jack Wilson",
+  "loanType": "Personal",
+  "loanAmount": 8000,
+  "interestRate": 5.7,
+  "loanTerm": 2,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2022-06-01T00:00:00.000Z"
+  },
+  "currentBalance": 2000,
+  "paymentDueDate": {
+    "$date": "2024-11-05T00:00:00.000Z"
+  },
+  "paymentStatus": "Overdue",
+  "defaultStatus": "Approved",
+  "riskRating": "High",
+  "applicationDate": {
+    "$date": "2022-05-10T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2022-05-20T00:00:00.000Z"
+  },
+  "notes": "Loan for emergency medical expenses.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167f5b1837e10448421e86"
+  },
+  "loanId": "LN12356",
+  "applicantName": "Karen Martinez",
+  "loanType": "Pensioner",
+  "loanAmount": 27000,
+  "interestRate": 4.2,
+  "loanTerm": 5,
+  "repaymentSchedule": "Bi-weekly",
+  "disbursementDate": {
+    "$date": "2023-05-12T00:00:00.000Z"
+  },
+  "currentBalance": 18000,
+  "paymentDueDate": {
+    "$date": "2024-11-10T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Approved",
+  "riskRating": "Low",
+  "applicationDate": {
+    "$date": "2023-04-15T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2023-04-30T00:00:00.000Z"
+  },
+  "notes": "Refinanced after two years.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167f831837e10448421e88"
+  },
+  "loanId": "LN12357",
+  "applicantName": "Liam Rodriguez",
+  "loanType": "Pensioner",
+  "loanAmount": 75000,
+  "interestRate": 8,
+  "loanTerm": 10,
+  "repaymentSchedule": "Quarterly",
+  "disbursementDate": {
+    "$date": "2020-02-28T00:00:00.000Z"
+  },
+  "currentBalance": 70000,
+  "paymentDueDate": {
+    "$date": "2024-12-01T00:00:00.000Z"
+  },
+  "paymentStatus": "Overdue",
+  "defaultStatus": "Review",
+  "riskRating": "High",
+  "applicationDate": {
+    "$date": "2020-01-10T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2020-01-30T00:00:00.000Z"
+  },
+  "notes": "Business affected by pandemic.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167f8a1837e10448421e8a"
+  },
+  "loanId": "LN12358",
+  "applicantName": "Mia Lopez",
+  "loanType": "Educational",
+  "loanAmount": 30000,
+  "interestRate": 4,
+  "loanTerm": 10,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2023-08-15T00:00:00.000Z"
+  },
+  "currentBalance": 29000,
+  "paymentDueDate": {
+    "$date": "2024-11-01T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Pending",
+  "riskRating": "Medium",
+  "applicationDate": {
+    "$date": "2023-07-20T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2023-08-01T00:00:00.000Z"
+  },
+  "notes": "Timely repayment.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167f961837e10448421e8c"
+  },
+  "loanId": "LN12359",
+  "applicantName": "Noah Young",
+  "loanType": "Personal",
+  "loanAmount": 10000,
+  "interestRate": 6.1,
+  "loanTerm": 3,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2021-01-05T00:00:00.000Z"
+  },
+  "currentBalance": 5000,
+  "paymentDueDate": {
+    "$date": "2024-10-25T00:00:00.000Z"
+  },
+  "paymentStatus": "Overdue",
+  "defaultStatus": "Review",
+  "riskRating": "Medium",
+  "applicationDate": {
+    "$date": "2020-12-10T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2020-12-30T00:00:00.000Z"
+  },
+  "notes": "Late on payments occasionally.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167fa31837e10448421e8e"
+  },
+  "loanId": "LN12360",
+  "applicantName": "Olivia Walker",
+  "loanType": "Educational",
+  "loanAmount": 35000,
+  "interestRate": 5.4,
+  "loanTerm": 6,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2023-03-18T00:00:00.000Z"
+  },
+  "currentBalance": 32000,
+  "paymentDueDate": {
+    "$date": "2024-10-30T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Approved",
+  "riskRating": "Low",
+  "applicationDate": {
+    "$date": "2023-02-15T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2023-03-01T00:00:00.000Z"
+  },
+  "notes": "Customer eligible for early payoff.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167fb51837e10448421e90"
+  },
+  "loanId": "LN12361",
+  "applicantName": "Patrick King",
+  "loanType": "Personal",
+  "loanAmount": 300000,
+  "interestRate": 3.9,
+  "loanTerm": 25,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2018-09-01T00:00:00.000Z"
+  },
+  "currentBalance": 270000,
+  "paymentDueDate": {
+    "$date": "2024-11-15T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Review",
+  "riskRating": "Low",
+  "applicationDate": {
+    "$date": "2018-08-10T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2018-08-25T00:00:00.000Z"
+  },
+  "notes": "Excellent credit history.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167fc51837e10448421e92"
+  },
+  "loanId": "LN12362",
+  "applicantName": "Quinn Evans",
+  "loanType": "Personal",
+  "loanAmount": 100000,
+  "interestRate": 7.5,
+  "loanTerm": 8,
+  "repaymentSchedule": "Quarterly",
+  "disbursementDate": {
+    "$date": "2020-06-15T00:00:00.000Z"
+  },
+  "currentBalance": 90000,
+  "paymentDueDate": {
+    "$date": "2024-12-05T00:00:00.000Z"
+  },
+  "paymentStatus": "Overdue",
+  "defaultStatus": "Pending",
+  "riskRating": "High",
+  "applicationDate": {
+    "$date": "2020-05-20T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2020-06-01T00:00:00.000Z"
+  },
+  "notes": "Loan in default.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167fe31837e10448421e94"
+  },
+  "loanId": "LN12363",
+  "applicantName": "Rachel Scott",
+  "loanType": "Personal",
+  "loanAmount": 15000,
+  "interestRate": 5,
+  "loanTerm": 4,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2023-01-01T00:00:00.000Z"
+  },
+  "currentBalance": 14000,
+  "paymentDueDate": {
+    "$date": "2024-11-10T00:00:00.000Z"
+  },
+  "paymentStatus": "Paid",
+  "defaultStatus": "Review",
+  "riskRating": "Medium",
+  "applicationDate": {
+    "$date": "2022-12-15T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2022-12-28T00:00:00.000Z"
+  },
+  "notes": "Loan used for wedding expenses.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67167ff11837e10448421e96"
+  },
+  "loanId": "LN12364",
+  "applicantName": "Samuel Turner",
+  "loanType": "Educational",
+  "loanAmount": 22000,
+  "interestRate": 4.5,
+  "loanTerm": 12,
+  "repaymentSchedule": "Monthly",
+  "disbursementDate": {
+    "$date": "2021-09-01T00:00:00.000Z"
+  },
+  "currentBalance": 18000,
+  "paymentDueDate": {
+    "$date": "2024-10-31T00:00:00.000Z"
+  },
+  "paymentStatus": "Overdue",
+  "defaultStatus": "Approved",
+  "riskRating": "Medium",
+  "applicationDate": {
+    "$date": "2021-08-15T00:00:00.000Z"
+  },
+  "approvalDate": {
+    "$date": "2021-08-25T00:00:00.000Z"
+  },
+  "notes": "Late on payments since last year.",
+  "__v": 0
+}]
