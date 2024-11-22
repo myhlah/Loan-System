@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './ViewMore.css';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const ViewMorePage = () => {
+  const navigate = useNavigate();
   const borrower = {
     fullName: "John Doe",
     dob: "1990-01-01",
@@ -21,8 +25,8 @@ const ViewMorePage = () => {
       monthlyPayment: 450,
     },
     repayments: [
-      { date: "2023-02-01", amount: 450, status: "Paid" },
-      { date: "2023-03-01", amount: 450, status: "Paid" },
+      { date: "2023-02-01", amount: 450, status: "Late" },
+      { date: "2023-03-01", amount: 450, status: "On-time" },
     ],
     documents: {
       loanAgreement: "Agreement_001.pdf",
@@ -30,192 +34,265 @@ const ViewMorePage = () => {
     },
   };
 
+  const handleBack = () => {
+    navigate('/officerdashboard3'); 
+};
+
+// PDF Download Function
+const overviewRef = useRef(null);
+const handleDownloadPDF = async () => {
+ if (!overviewRef.current) {
+   console.error("Element not attached to the DOM.");
+   return;
+ }
+
+ try {
+   const canvas = await html2canvas(overviewRef.current, { scale: 2 });
+   const imgData = canvas.toDataURL('image/png');
+   
+   // Set up PDF dimensions
+   const pdf = new jsPDF('p', 'mm', [215.9,  355.6]); // Adjust for long paper size
+   const imgWidth = pdf.internal.pageSize.getWidth();
+   const imgHeight = (canvas.height * imgWidth) / canvas.width;
+   
+   let position = 0; // To track the vertical position
+   const pageHeight = pdf.internal.pageSize.getHeight(); // Height of one page in PDF
+   
+   // Loop through canvas and create pages if the content exceeds one page
+   while (position < imgHeight) {
+     pdf.addImage(imgData, 'PNG', 0, -position, imgWidth, imgHeight); // Y position set to -position
+     position += pageHeight; // Move down by one page height
+
+     // Add a new page if there's still content left to add
+     if (position < imgHeight) {
+       pdf.addPage();
+     }
+   }
+   
+   pdf.save('Borrower_Information 1/2.pdf');
+ } catch (error) {
+   console.error("Error generating PDF:", error);
+ }
+};
+
+const [currentDateTime, setCurrentDateTime] = useState(new Date());
+
+ useEffect(() => {
+   // Update date and time every second
+   const timer = setInterval(() => {
+     setCurrentDateTime(new Date());
+   }, 1000);
+
+   // Clear timer on component unmount
+   return () => clearInterval(timer);
+ }, []);
+
+ // Format date and time
+ const formattedDate = currentDateTime.toLocaleDateString();
+ const formattedTime = currentDateTime.toLocaleTimeString();
   return (
     <div className="pdf-container">
       <header className="headeroff">
           <img src="logo.png" alt="MSU-IIT NMPC Logo" className="logooff"/>
           <h2 className="landingh2off">MSU-IIT National Multi-Purpose Cooperative</h2>
       </header>
-      <div className="headerview">
-        <h1>Borrower Information</h1>
-        <p>Loan Application and Transaction Summary</p>
-      </div>
+        <button className="back-btn1" onClick={handleBack}>Back</button>
+        <button className="printDownload1" onClick={handleDownloadPDF}>Download</button>
+       
+      <br/>
+      <div ref={overviewRef} id="overviewRef"><br/>
+        <div className="headerview">
+          <h1>Borrower Information</h1>
+          <p>Loan Application and Transaction Summary</p>
+          <h5>Date: {formattedDate} Time: {formattedTime}</h5>
+        </div> <br/>
 
-      <div className="section">
-        <h2>Borrower Profile</h2>
-        <div className="section-content">
-          <p><strong>Member ID:</strong> {borrower.fullName}</p>
-          <p><strong>Full Name:</strong> {borrower.fullName}</p>
-          <p><strong>Contact Number:</strong> {borrower.contactNumber}</p>
-          <p><strong>Email Address:</strong> {borrower.email}</p>
-          <p><strong>Permanent Address:</strong> {borrower.email}</p>
-          <p><strong>Present Address:</strong> {borrower.email}</p>
-          <p><strong>Contact/Telephone Number:</strong> {borrower.contactNumber}</p>
-          <p><strong>Sex:</strong> {borrower.contactNumber}</p>
-          <p><strong>Age:</strong> {borrower.email}</p>
-          <p><strong>Civil Status:</strong> {borrower.dob}</p>
-          <p><strong>Name of Spouse:</strong> {borrower.contactNumber}</p>
-          <p><strong>Spouse Occupation:</strong> {borrower.email}</p>
-          <p><strong>Valid ID/#:</strong> ${borrower.loanDetails.loanAmount}</p>
-
-          <p><strong>Employer:</strong> {borrower.contactNumber}</p>
-          <p><strong>Employer Contact Number:</strong> {borrower.email}</p>
-          <p><strong>Employement Status/Position Held:</strong> {borrower.email}</p>
-          <p><strong>Business Name:</strong> {borrower.email}</p>
-          <p><strong>Business Address:</strong> {borrower.contactNumber}</p>
-          <p><strong>Length of Coop Membership:</strong> {borrower.contactNumber}</p>
-          <p><strong>Account Balance:</strong> {borrower.email}</p>
-            <ul>
-              <li><p><strong>Share Capital:</strong> {borrower.dob}</p></li>
-              <li><p><strong>Savings Deposit:</strong> {borrower.dob}</p></li>
-              <li><p><strong>Other Deposit:</strong> {borrower.dob}</p></li>
-            </ul>
-          <p><strong>Member-Borrower's Signature:</strong> {borrower.contactNumber}</p>
-          <p><strong>Spouse's Signature:</strong> {borrower.email}</p>  
+        <div className="section">
+          <h2>Borrower Profile</h2>
+          <div className="section-content1">
+            <div class="profile-column">
+              <p><strong>Member ID:</strong> {borrower.fullName}</p>
+              <p><strong>Full Name:</strong> {borrower.fullName}</p>
+              <p><strong>Contact Number:</strong> {borrower.contactNumber}</p>
+              <p><strong>Email Address:</strong> {borrower.email}</p>
+              <p><strong>Permanent Address:</strong> {borrower.email}</p>
+              <p><strong>Present Address:</strong> {borrower.email}</p>
+              <p><strong>Contact/Telephone Number:</strong> {borrower.contactNumber}</p>
+              <p><strong>Sex:</strong> {borrower.contactNumber}</p>
+              <p><strong>Age:</strong> {borrower.email}</p>
+              <p><strong>Civil Status:</strong> {borrower.dob}</p>
+              <p><strong>Name of Spouse:</strong> {borrower.contactNumber}</p>
+              <p><strong>Spouse Occupation:</strong> {borrower.email}</p>
+              <p><strong>Valid ID/#:</strong> ${borrower.loanDetails.loanAmount}</p>
+            </div>
+            <div class="profile-column">
+              <p><strong>Employer:</strong> {borrower.contactNumber}</p>
+              <p><strong>Employer Contact Number:</strong> {borrower.email}</p>
+              <p><strong>Employement Status/Position Held:</strong> {borrower.email}</p>
+              <p><strong>Business Name:</strong> {borrower.email}</p>
+              <p><strong>Business Address:</strong> {borrower.contactNumber}</p>
+              <p><strong>Length of Coop Membership:</strong> {borrower.contactNumber}</p>
+              <p><strong>Account Balance:</strong> {borrower.email}</p>
+                <ul>
+                  <li><p><strong>Share Capital:</strong> {borrower.dob}</p></li>
+                  <li><p><strong>Savings Deposit:</strong> {borrower.dob}</p></li>
+                  <li><p><strong>Other Deposit:</strong> {borrower.dob}</p></li>
+                </ul>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="section">
-        <h2>Cash Flow Statement</h2>
-        <div className="section-content">
-          <p><strong>Salaries and wages:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Spouse Income:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Income from Business(Net):</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Income from financial investment/dividend:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Other Income:</strong> {borrower.loanDetails.loanType}</p>
-            <p><strong>TOTAL INCOME:</strong> {borrower.loanDetails.loanId}</p>
-          
+        <div className="section">
+          <h2>Cash Flow Statement</h2>
+          <div className="section-content">
+          <table className="cash-flow-table">
+            <tbody>
+              <tr>
+                <td>Salaries and Wages</td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>Spouse Income</td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>Income from Business (Net)</td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>Income from Financial Investment/Dividend</td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>Other Income</td>
+                <td>{borrower.loanDetails.loanType}</td>
+              </tr>
+              <tr>
+                <td><strong>Total Income</strong></td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+            </tbody>
+          </table><br/>
           <h5>Expenditure and Cash Outlays</h5>  
-          <p><strong>Food Expenses:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>House Rentals:</strong> {borrower.loanDetails.applicationDate}</p>
-          <p><strong>Educational: Tuition Fess, Miscellaneous fees, Books & Supplies, etc.:</strong> {borrower.loanDetails.loanStatus}</p>
-          <p><strong>Medical and Dental:</strong> ${borrower.loanDetails.loanAmount}</p>
-          <p><strong>Clothing:</strong> {borrower.loanDetails.interestRate}%</p>
-          <p><strong>Personal Hygiene:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Cooking/Gas:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Transportation:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Water Bill Payment:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Electricity Bill Payment:</strong> ${borrower.loanDetails.loanAmount}</p>
-          <p><strong>Telephone/Mobile/Internet Bill Payment:</strong> {borrower.loanDetails.interestRate}%</p>
-          <p><strong>Salary of Helper:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>TAxes and Licenses:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Other Expenses:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-            <p><strong>TOTAL EXPENDITURES:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          
-            <h5>Cash Outlays</h5>  
-          <p><strong>Payment of other debts/amortization:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Productive loan from other banks/coop:</strong> {borrower.loanDetails.applicationDate}</p>
-          <p><strong>Housing Amortization:</strong> {borrower.loanDetails.loanStatus}</p>
-          <p><strong>Vehicle Amortization:</strong> ${borrower.loanDetails.loanAmount}</p>
-          <p><strong>Appliances Amortization:</strong> {borrower.loanDetails.interestRate}%</p>
-          <p><strong>Others:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Payment of Insurance or Pension Premium:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Other Cash Outlays:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Water Bill Payment:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Electricity Bill Payment:</strong> ${borrower.loanDetails.loanAmount}</p>
-          <p><strong>Telephone/Mobile/Internet Bill Payment:</strong> {borrower.loanDetails.interestRate}%</p>
-          <p><strong>Salary of Helper:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>TAxes and Licenses:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Other Expenses:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-            <p><strong>TOTAL CASH OUTLAYS:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>NET SAVINGS:</strong> ${borrower.loanDetails.monthlyPayment}</p>  
+          <table className="cash-flow-table">
+            <tbody>
+              <tr>
+                <td>Food Expenses</td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>House Rentals</td>
+                <td>{borrower.loanDetails.applicationDate}</td>
+              </tr>
+              <tr>
+                <td>Educational</td>
+                <td>{borrower.loanDetails.loanStatus}</td>
+              </tr>
+              <tr>
+                <td>Medical and Dental</td>
+                <td>${borrower.loanDetails.loanAmount}</td>
+              </tr>
+              <tr>
+                <td>Clothing</td>
+                <td>{borrower.loanDetails.interestRate}%</td>
+              </tr>
+              <tr>
+                <td>Personal Hygiene</td>
+                <td>${borrower.loanDetails.monthlyPayment}</td>
+              </tr>
+              <tr>
+                <td>Cooking/Gas</td>
+                <td>${borrower.loanDetails.monthlyPayment}</td>
+              </tr>
+              <tr>
+                <td>Transportation</td>
+                <td>${borrower.loanDetails.monthlyPayment}</td>
+              </tr>
+              <tr>
+                <td>Water Bill Payment</td>
+                <td>${borrower.loanDetails.monthlyPayment}</td>
+              </tr>
+              <tr>
+                <td>Electricity Bill Payment</td>
+                <td>${borrower.loanDetails.monthlyPayment}</td>
+              </tr>
+              <tr>
+                <td>Telephone/Mobile/Internet Bill Payment</td>
+                <td>${borrower.loanDetails.monthlyPayment}</td>
+              </tr>
+              <tr>
+                <td>Salary of Helper</td>
+                <td>${borrower.loanDetails.monthlyPayment}</td>
+              </tr>
+              <tr>
+                <td>Taxes and Licenses</td>
+                <td>${borrower.loanDetails.monthlyPayment}</td>
+              </tr>
+              <tr>
+                <td>Other Expenses</td>
+                <td>${borrower.loanDetails.monthlyPayment}</td>
+              </tr>
+              <tr>
+                <td><strong>Total Expenditures</strong></td>
+                <td>${borrower.loanDetails.monthlyPayment}</td>
+              </tr>
+            </tbody>
+          </table>  <br />
+          <h5>Cash Outlays</h5>  
+          <table className="cash-flow-table">
+            <tbody>
+              <tr>
+                <td>Payment of other debts/amortization</td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>Productive loan from other banks/coop</td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>Housing Amortization</td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>Vehicle Amortization</td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>Appliances Amortization</td>
+                <td>{borrower.loanDetails.loanType}</td>
+              </tr>
+              <tr>
+                <td><strong>Others</strong></td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>Payment of Insurance or Pension Premium</td>
+                <td>{borrower.loanDetails.loanType}</td>
+              </tr>
+              <tr>
+                <td><strong>Other Cash Outlays</strong></td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>TOTAL CASH OUTLAYS</td>
+                <td>{borrower.loanDetails.loanType}</td>
+              </tr>
+              <tr>
+                <td><strong>TOTAL EXPENDITURE AND CASH OUTLAYS</strong></td>
+                <td>{borrower.loanDetails.loanId}</td>
+              </tr>
+              <tr>
+                <td>NET SAVINGS</td>
+                <td>{borrower.loanDetails.loanType}</td>
+              </tr>
+    
+            </tbody>
+          </table><br/>
+          </div>
         </div>
       </div>
-
-      <div className="section">
-        <h2>Loan Application Details</h2>
-        <div className="section-content">
-          <p><strong>Loan ID:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Branch Applied:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Date Filed:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>New/Renewal:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Loan Type:</strong> {borrower.loanDetails.loanType}</p>
-          <p><strong>Amount Applied:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Term of Loan:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Purpose of Loan:</strong> {borrower.loanDetails.applicationDate}</p>
-          <p><strong>Loan Status:</strong> {borrower.loanDetails.loanStatus}</p>
-          <p><strong>Loan Amount Approved:</strong> ${borrower.loanDetails.loanAmount}</p>
-          <p><strong>Interest Rate:</strong> {borrower.loanDetails.interestRate}%</p>
-          <p><strong>Collateral/Security Offered:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Source of Payment:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Mode of Payment:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Manner of Payment:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Loan Application Verified By:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-          <p><strong>Verified Date:</strong> ${borrower.loanDetails.monthlyPayment}</p>
-        </div>
-
-        <h2>Co-Maker's Statement Details</h2>
-        <div className="section-content">
-          <p><strong>Member ID:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>From Branch:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Date Signed:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Full Name:</strong> {borrower.fullName}</p>
-          <p><strong>Civil Status:</strong> {borrower.dob}</p>
-          <p><strong>No. of Dependent/s:</strong> {borrower.dob}</p>
-          <p><strong>Sex:</strong> {borrower.contactNumber}</p>
-          <p><strong>Age:</strong> {borrower.email}</p>
-          <p><strong>Contact/Telephone Number:</strong> {borrower.contactNumber}</p>
-          <p><strong>Email Address:</strong> {borrower.email}</p>
-          <p><strong>Name of Spouse:</strong> {borrower.email}</p>
-          <p><strong>Permanent Address:</strong> {borrower.email}</p>
-          <p><strong>Present Address:</strong> {borrower.email}</p>
-          <p><strong>Residence Status:</strong> {borrower.email}</p>
-          <p><strong>Realtionship to Member-borrower:</strong> ${borrower.loanDetails.loanAmount}</p>
-          <p><strong>Known Member-borrower for how amny years?:</strong> ${borrower.loanDetails.loanAmount}</p>
-          <p><strong>Co-maker's Signature:</strong> ${borrower.loanDetails.loanAmount}</p>
-          <p><strong>Valid ID/#:</strong> ${borrower.loanDetails.loanAmount}</p>
-
-          <p><strong>Employer:</strong> {borrower.contactNumber}</p>
-          <p><strong>Employer Contact Number:</strong> {borrower.email}</p>
-          <p><strong>Employement Status/Position Held:</strong> {borrower.email}</p>
-          <p><strong>Annual Salary:</strong> {borrower.email}</p>
-          <p><strong>Length of Service:</strong> {borrower.contactNumber}</p>
-          
-          <p><strong>Firm/Trade/Business Name:</strong> {borrower.email}</p>
-          <p><strong>Business Address:</strong> {borrower.contactNumber}</p>
-          <p><strong>Nature of Business:</strong> {borrower.email}</p>
-          <p><strong>Sole Owner or Partner:</strong> {borrower.contactNumber}</p>
-          <p><strong>Capital Invested:</strong> {borrower.email}</p>
-
-          <h5>Outstanding Obligation/s, if any: (As Proncipal or Co-maker)</h5>  
-          <p><strong>Creditor:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Principal Amount:</strong> {borrower.loanDetails.applicationDate}</p>
-          <p><strong>Present Balance:</strong> {borrower.loanDetails.loanStatus}</p>
-          <p><strong>Maturity Date:</strong> ${borrower.loanDetails.loanAmount}</p>
-
-
-          <h5>List of Properties(Real and Personal)</h5>  
-          <p><strong>Description:</strong> {borrower.loanDetails.loanId}</p>
-          <p><strong>Location:</strong> {borrower.loanDetails.applicationDate}</p>
-          <p><strong>Area:</strong> {borrower.loanDetails.loanStatus}</p>
-          <p><strong>Market Value:</strong> ${borrower.loanDetails.loanAmount}</p>
-          <p><strong>Encumbrances:</strong> ${borrower.loanDetails.loanAmount}</p>
-        </div>
-      </div>
-
-      <div className="section">
-        <h2>Repayment History</h2>
-        <div className="section-content">
-          {borrower.repayments.length > 0 ? (
-            borrower.repayments.map((payment, index) => (
-              <p key={index}>
-                <strong>Date:</strong> {payment.date} - 
-                <strong> Amount:</strong> ${payment.amount} - 
-                <strong> Status:</strong> {payment.status}
-              </p>
-            ))
-          ) : (
-            <p>No repayment history available</p>
-          )}
-        </div>
-      </div>
-
-      <div className="section">
-        <h2>Documents</h2>
-        <div className="section-content">
-          <p><strong>Loan Agreement:</strong> {borrower.documents.loanAgreement}</p>
-          <p><strong>Collateral Documents:</strong> {borrower.documents.collateral}</p>
-        </div>
+      <div class="parent-container12">
+          <a href="/viewmorepage" class="next-btn">Next →</a>
       </div>
 
       <footer className="footer">
