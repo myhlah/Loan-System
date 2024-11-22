@@ -4,6 +4,7 @@ import Login from './components/login';
 import Register from './components/signup'; 
 import Landing from './components/landing';
 import ViewMore from './components/ViewMore'; 
+import ViewMorePage from './components/ViewNext'
 import Borrower from './components/borrowerdash';
 import LoanStatus from './components/loanstatus';
 import TransactionHistory from './components/transac';
@@ -32,6 +33,7 @@ function App() {
           <Route path="/officerprof" element={<OfficerProfile />} />
           <Route path="/officerdashboard1" element={<OfficerDashboard1 />} />
           <Route path="/view" element={<ViewMore />} />
+          <Route path="/ViewMorePage" element={<ViewMorePage />} />
           <Route path="/generate" element={<Generate />} /> 
             {/*   <Route path="/payment" element={<Payment />} />
               <Route path="/view-more/:id" element={<ViewMore />} />
